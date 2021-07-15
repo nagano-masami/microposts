@@ -38,4 +38,10 @@ class User < ApplicationRecord
     #含まれてない場合には、false
     self.followings.include?(other_user)
   end
+
+  #タイムライン用のマイクロソフトを取得するためのメソッド
+  def feed_microposts
+    Micropost.where(user_id: self.following_ids + [self.id])
+  end
+
 end
